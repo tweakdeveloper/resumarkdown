@@ -10,6 +10,7 @@
     --color-dark: #2e282a;
     --color-light: #fbfbfb;
     --fonts-sans: Rubik, Arial, sans-serif;
+    --padding-md: 0.5em 1em;
   }
 
   :global(body) {
