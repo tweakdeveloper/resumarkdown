@@ -15,8 +15,8 @@
 </script>
 
 <li
-  aria-controls="nav-tree"
-  aria-selected={$pane === destination}
+  aria-controls={`pane-${$pane}`}
+  aria-selected={destination === $pane}
   role="tab"
   tabindex="0"
   on:click={navigate}
