@@ -3,6 +3,8 @@
 
   export let destination: Pane;
 
+  $: selected = destination === $pane;
+
   function handleKey({ key }: KeyboardEvent) {
     if (key === ' ' || key === 'Enter' || key === 'Spacebar') {
       navigate();
@@ -16,9 +18,10 @@
 
 <li
   aria-controls={`pane-${$pane}`}
-  aria-selected={destination === $pane}
+  aria-selected={selected}
   role="tab"
   tabindex="0"
+  class:selected
   on:click={navigate}
   on:keyup={handleKey}
 >
@@ -31,6 +34,16 @@
     margin: 0;
     padding: @padding-md;
     text-align: center;
+    transition: background-color 0.2s;
+  }
+
+  li.selected {
+    background-color: darken(@color-light, 20%);
+  }
+
+  li:focus,
+  li:hover {
+    background-color: darken(@color-light, 10%);
   }
 
   li:not(:last-of-type) {
