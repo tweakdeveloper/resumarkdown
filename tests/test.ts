@@ -6,3 +6,8 @@ test('page has headline', async ({ page }) => {
   await expect(headline).toBeVisible();
   await expect(headline).toHaveText('resumarkdown');
 });
+
+test('page has nav tree', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('nav')).toBeVisible();
+});
