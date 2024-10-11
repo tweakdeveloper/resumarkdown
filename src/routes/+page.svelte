@@ -1,4 +1,8 @@
+<script lang="ts">
+  import Headline from '$lib/components/headline.svelte';
+</script>
+
 <svelte:head>
   <title>resumarkdown</title>
 </svelte:head>
-<h1>resumarkdown</h1>
+<Headline>resumarkdown</Headline>
