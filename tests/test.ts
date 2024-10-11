@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('home page has expected h1', async ({ page }) => {
+test('page has headline', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('h1')).toBeVisible();
+  const headline = page.locator('header h1');
+  await expect(headline).toBeVisible();
+  await expect(headline).toHaveText('resumarkdown');
 });
