@@ -27,6 +27,7 @@
 
 <style lang="less">
   li {
+    font-weight: 600;
     margin: 0;
     padding: @padding-md;
     text-align: center;
