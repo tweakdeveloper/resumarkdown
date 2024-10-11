@@ -1,4 +1,29 @@
-<li><slot /></li>
+<script lang="ts">
+  import { pane, type Pane } from '$lib/stores/nav';
+
+  export let destination: Pane;
+
+  function handleKey({ key }: KeyboardEvent) {
+    if (key === ' ' || key === 'Enter' || key === 'Spacebar') {
+      navigate();
+    }
+  }
+
+  function navigate() {
+    pane.set(destination);
+  }
+</script>
+
+<li
+  aria-controls="nav-tree"
+  aria-selected={$pane === destination}
+  role="tab"
+  tabindex="0"
+  on:click={navigate}
+  on:keyup={handleKey}
+>
+  <slot />
+</li>
 
 <style lang="less">
   li {

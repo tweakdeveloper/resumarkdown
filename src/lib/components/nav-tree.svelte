@@ -1,5 +1,5 @@
 <nav>
-  <ul>
+  <ul id="nav-tree" role="tablist">
     <slot />
   </ul>
 </nav>

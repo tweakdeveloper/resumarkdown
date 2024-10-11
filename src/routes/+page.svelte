@@ -10,8 +10,8 @@
 <header>
   <Headline>resumarkdown</Headline>
   <NavTree>
-    <NavItem>content</NavItem>
-    <NavItem>style</NavItem>
-    <NavItem>preview</NavItem>
+    <NavItem destination="content">content</NavItem>
+    <NavItem destination="style">style</NavItem>
+    <NavItem destination="preview">preview</NavItem>
   </NavTree>
 </header>
