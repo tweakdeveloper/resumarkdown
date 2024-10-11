@@ -1,15 +1,10 @@
-<header>
-  <h1><slot /></h1>
-</header>
+<h1><slot /></h1>
 
 <style lang="less">
   h1 {
-    text-align: center;
-  }
-
-  header {
     background-color: @color-dark;
     color: @color-light;
     padding: @padding-md;
+    text-align: center;
   }
 </style>
