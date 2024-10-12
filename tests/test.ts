@@ -11,3 +11,15 @@ test('page has nav tree', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('nav')).toBeVisible();
 });
+
+test('nav items work', async ({ page }) => {
+  await page.goto('/');
+  let lastPane = '#pane-preview';
+  for (const pane of ['content', 'style', 'preview']) {
+    const currentPaneId = `pane-${pane}`;
+    await page.locator(`nav li[aria-controls="${currentPaneId}"]`).click();
+    await expect(page.locator(`#${currentPaneId}`)).toBeVisible();
+    await expect(page.locator(lastPane)).toBeHidden();
+    lastPane = `#${currentPaneId}`;
+  }
+});
