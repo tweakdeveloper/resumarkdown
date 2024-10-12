@@ -19,3 +19,14 @@ test('desktop page has no "preview" nav item', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('tab').filter({ hasText: 'preview' })).toBeHidden();
 });
+
+test('desktop page has equal width for both columns', async ({ page }) => {
+  await page.goto('/');
+  const { width: contentWidth } = (await page.getByTestId('content-pane').boundingBox()) ?? {
+    width: -1,
+  };
+  const { width: previewWidth } = (await page.getByTestId('preview-pane').boundingBox()) ?? {
+    width: -2,
+  };
+  expect(contentWidth).toEqual(previewWidth);
+});

@@ -27,7 +27,7 @@
     }
 
     @media screen and (min-width: @sizes[lg]) {
-      flex-grow: 1;
+      width: 50%;
 
       &.preview {
         display: unset !important;
