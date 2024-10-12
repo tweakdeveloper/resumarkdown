@@ -17,7 +17,7 @@
 </script>
 
 <li
-  aria-controls={`pane-${$pane}`}
+  aria-controls={`pane-${destination}`}
   aria-selected={selected}
   role="tab"
   tabindex="0"
