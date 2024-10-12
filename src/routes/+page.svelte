@@ -5,6 +5,8 @@
   import NavItem from '$lib/components/nav-item.svelte';
   import NavTree from '$lib/components/nav-tree.svelte';
 
+  export let data;
+
   let markdown: string = '';
   let stylesheet: string = '';
 </script>
@@ -15,7 +17,7 @@
 <div>
   <header>
     <Headline>resumarkdown</Headline>
-    <NavTree>
+    <NavTree mobile={data.mobile}>
       <NavItem destination="content">content</NavItem>
       <NavItem destination="style">style</NavItem>
       <NavItem destination="preview">preview</NavItem>

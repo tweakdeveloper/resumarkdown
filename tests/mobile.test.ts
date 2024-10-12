@@ -1,6 +1,11 @@
 import { expect, test } from '@playwright/test';
 
-test.use({ viewport: { height: 2556, width: 1179 } });
+import UserAgent from 'user-agents';
+
+test.use({
+  viewport: { height: 2556, width: 1179 },
+  userAgent: new UserAgent({ deviceCategory: 'mobile' }).toString(),
+});
 
 test('mobile page has nav tree hidden by default', async ({ page }) => {
   await page.goto('/');

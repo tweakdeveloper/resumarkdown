@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { slide } from 'svelte/transition';
 
   import { navHeight } from '$lib/stores/layout';
 
   import NavToggle from './nav-toggle.svelte';
 
-  let open: boolean = false;
+  export let mobile: boolean = true;
 
-  let hidden: boolean;
-  $: hidden = !open;
+  let open: boolean = false;
 
   // magic to offset preview pane on desktop
   let navRef: HTMLElement;
@@ -20,9 +20,11 @@
 
 <nav bind:this={navRef}>
   <NavToggle bind:navOpen={open} />
-  <ul class:hidden role="tablist">
-    <slot />
-  </ul>
+  {#if open || !mobile}
+    <ul role="tablist" transition:slide={{ duration: 300 }}>
+      <slot />
+    </ul>
+  {/if}
 </nav>
 
 <style lang="less">
@@ -35,14 +37,10 @@
     margin: 0;
     padding: 0;
 
-    &.hidden {
-      display: none;
-    }
-
     @media screen and (min-width: @sizes[lg]) {
       align-items: center;
       border-right: @border;
-      display: flex !important;
+      display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       width: 50%;

@@ -14,11 +14,16 @@
     "lint": "prettier --check .",
     "format": "prettier --write ."
   },
+  "dependencies": {
+    "ua-parser-js": "^1.0.39"
+  },
   "devDependencies": {
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@types/ua-parser-js": "^0.7.39",
+    "@types/user-agents": "^1.0.4",
     "less": "^4.2.0",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
@@ -26,6 +31,7 @@
     "svelte-check": "^4.0.0",
     "svelte-preprocess": "^6.0.3",
     "typescript": "^5.0.0",
+    "user-agents": "^1.1.325",
     "vite": "^5.0.3",
     "vitest": "^2.0.0"
   },
