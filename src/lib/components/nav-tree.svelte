@@ -18,6 +18,7 @@
   ul {
     @border: 2px solid @color-dark;
     border-bottom: @border;
+    box-sizing: border-box;
     list-style-type: none;
     margin: 0;
     padding: 0;

@@ -20,6 +20,7 @@
 
 <style lang="less">
   div {
+    box-sizing: border-box;
     height: 100%;
 
     &.hidden {
@@ -27,9 +28,11 @@
     }
 
     @media screen and (min-width: @sizes[lg]) {
+      border-right: 2px solid @color-dark;
       width: 50%;
 
       &.preview {
+        border-right: unset !important;
         display: unset !important;
       }
     }
