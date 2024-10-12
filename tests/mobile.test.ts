@@ -19,3 +19,8 @@ test('nav toggle works', async ({ page }) => {
   await page.locator('nav button').click();
   await expect(page.locator('nav ul')).toBeHidden();
 });
+
+test('mobile page has single-column layout', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#pane-preview')).toBeHidden();
+});

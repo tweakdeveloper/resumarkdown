@@ -9,3 +9,8 @@ test('desktop page does not have nav toggle', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('nav button')).toBeHidden();
 });
+
+test('desktop page has two-column layout', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#pane-preview')).toBeVisible();
+});

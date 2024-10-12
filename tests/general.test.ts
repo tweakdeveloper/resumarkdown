@@ -14,7 +14,9 @@ test('nav items work', async ({ page }) => {
     const currentPaneId = `pane-${pane}`;
     await page.locator(`nav li[aria-controls="${currentPaneId}"]`).click();
     await expect(page.locator(`#${currentPaneId}`)).toBeVisible();
-    await expect(page.locator(lastPane)).toBeHidden();
+    if (lastPane !== '#pane-preview') {
+      await expect(page.locator(lastPane)).toBeHidden();
+    }
     lastPane = `#${currentPaneId}`;
   }
 });

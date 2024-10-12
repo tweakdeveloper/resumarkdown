@@ -66,5 +66,12 @@
 
   main {
     flex-grow: 1;
+
+    @media screen and (min-width: @sizes[lg]) {
+      align-items: start;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 </style>
