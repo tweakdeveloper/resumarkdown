@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { navHeight } from '$lib/stores/layout';
   import { pane as navStore, type Pane } from '$lib/stores/nav';
 
   export let pane: Pane;
@@ -12,9 +13,20 @@
   // always show preview pane on a two column layout
   let preview: boolean;
   $: preview = pane === 'preview';
+
+  // offset preview pane upward on desktop
+  let offset: number;
+  $: offset = preview ? $navHeight : 0;
 </script>
 
-<div id={`pane-${pane}`} data-testid={testid} role="tabpanel" class:hidden class:preview>
+<div
+  id={`pane-${pane}`}
+  data-testid={testid}
+  role="tabpanel"
+  class:hidden
+  class:preview
+  style:--offset={`-${offset}px`}
+>
   <slot />
 </div>
 
@@ -34,6 +46,9 @@
       &.preview {
         border-right: unset !important;
         display: unset !important;
+        height: calc(100% - var(--offset));
+        position: relative;
+        top: var(--offset);
       }
     }
   }
