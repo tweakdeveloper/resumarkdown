@@ -31,7 +31,7 @@
 
 <style lang="less">
   li {
-    font-weight: 600;
+    font-weight: @weight-semibold;
     margin: 0;
     padding: @padding-md;
     text-align: center;
