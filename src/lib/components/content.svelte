@@ -47,8 +47,7 @@
         border-right: unset !important;
         display: unset !important;
         height: calc(100% - var(--offset));
-        position: relative;
-        top: var(--offset);
+        transform: translateY(var(--offset));
       }
     }
   }
