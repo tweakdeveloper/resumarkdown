@@ -3,6 +3,7 @@
 
   export let destination: Pane;
 
+  let selected: boolean;
   $: selected = destination === $pane;
 
   function handleKey({ key }: KeyboardEvent) {
