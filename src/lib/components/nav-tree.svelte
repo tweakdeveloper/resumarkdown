@@ -17,6 +17,7 @@
 <style lang="less">
   ul {
     @border: 2px solid @color-dark;
+
     border-bottom: @border;
     box-sizing: border-box;
     list-style-type: none;
