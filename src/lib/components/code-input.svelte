@@ -1,4 +1,8 @@
-<textarea></textarea>
+<script lang="ts">
+  export let code: string;
+</script>
+
+<textarea bind:value={code}></textarea>
 
 <style lang="less">
   textarea {

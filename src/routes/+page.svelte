@@ -4,6 +4,9 @@
   import Headline from '$lib/components/headline.svelte';
   import NavItem from '$lib/components/nav-item.svelte';
   import NavTree from '$lib/components/nav-tree.svelte';
+
+  let markdown: string = '';
+  let stylesheet: string = '';
 </script>
 
 <svelte:head>
@@ -20,18 +23,30 @@
   </header>
   <main>
     <Content pane="content">
-      <CodeInput />
+      <CodeInput bind:code={markdown} />
     </Content>
     <Content pane="style">
-      <CodeInput />
+      <CodeInput bind:code={stylesheet} />
     </Content>
     <Content pane="preview">
-      <p>preview</p>
+      <dl>
+        <dt>markdown:</dt>
+        <dd>{markdown !== '' ? markdown : '???'}</dd>
+        <dt>stylesheet:</dt>
+        <dd>{stylesheet !== '' ? stylesheet : '???'}</dd>
+      </dl>
     </Content>
   </main>
 </div>
 
 <style lang="less">
+  // util
+  .margin-v(@v) {
+    margin-bottom: @v;
+    margin-top: @v;
+  }
+
+  // styles
   div {
     align-items: stretch;
     display: flex;
@@ -40,12 +55,16 @@
     justify-content: start;
   }
 
-  main {
-    flex-grow: 1;
+  dd {
+    .margin-v(@padding-lg-y);
   }
 
-  p {
+  dl {
     margin: 0;
-    padding: @padding-md;
+    padding: @padding-xl;
+  }
+
+  main {
+    flex-grow: 1;
   }
 </style>
