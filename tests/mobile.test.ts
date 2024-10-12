@@ -24,3 +24,9 @@ test('mobile page has single-column layout', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#pane-preview')).toBeHidden();
 });
+
+test('mobile page has preview nav item', async ({ page }) => {
+  await page.goto('/');
+  await page.getByText('show navigation').click();
+  await expect(page.getByRole('tab').filter({ hasText: 'preview' })).toBeVisible();
+});

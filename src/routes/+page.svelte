@@ -22,13 +22,13 @@
     </NavTree>
   </header>
   <main>
-    <Content pane="content">
+    <Content pane="content" testid="content-pane">
       <CodeInput bind:code={markdown} />
     </Content>
-    <Content pane="style">
+    <Content pane="style" testid="style-pane">
       <CodeInput bind:code={stylesheet} />
     </Content>
-    <Content pane="preview">
+    <Content pane="preview" testid="preview-pane">
       <dl>
         <dt>markdown:</dt>
         <dd>{markdown !== '' ? markdown : '???'}</dd>

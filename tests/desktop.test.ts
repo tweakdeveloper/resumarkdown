@@ -14,3 +14,8 @@ test('desktop page has two-column layout', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#pane-preview')).toBeVisible();
 });
+
+test('desktop page has no "preview" nav item', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('tab').filter({ hasText: 'preview' })).toBeHidden();
+});

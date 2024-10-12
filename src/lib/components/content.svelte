@@ -3,6 +3,8 @@
 
   export let pane: Pane;
 
+  export let testid: string | undefined = undefined;
+
   // don't show pane if we're not the current pane
   let hidden: boolean;
   $: hidden = pane !== $navStore;
@@ -12,7 +14,9 @@
   $: preview = pane === 'preview';
 </script>
 
-<div id={`pane-${pane}`} role="tabpanel" class:hidden class:preview><slot /></div>
+<div id={`pane-${pane}`} data-testid={testid} role="tabpanel" class:hidden class:preview>
+  <slot />
+</div>
 
 <style lang="less">
   div {

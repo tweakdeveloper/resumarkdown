@@ -6,6 +6,10 @@
   let selected: boolean;
   $: selected = destination === $pane;
 
+  // we need to hide the "preview" tab on desktop
+  let hiddenOnDesktop: boolean;
+  $: hiddenOnDesktop = destination === 'preview';
+
   function handleKey({ key }: KeyboardEvent) {
     if (key === ' ' || key === 'Enter' || key === 'Spacebar') {
       navigate();
@@ -22,6 +26,7 @@
   aria-selected={selected}
   role="tab"
   tabindex="0"
+  class:hiddenOnDesktop
   class:selected
   on:click={navigate}
   on:keyup={handleKey}
@@ -39,6 +44,10 @@
 
     @media screen and (min-width: @sizes[lg]) {
       flex-grow: 1;
+
+      &.hiddenOnDesktop {
+        display: none;
+      }
     }
 
     &.selected {

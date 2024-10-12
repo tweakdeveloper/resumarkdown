@@ -9,14 +9,9 @@ test('page has headline', async ({ page }) => {
 
 test('nav items work', async ({ page }) => {
   await page.goto('/');
-  let lastPane = '#pane-preview';
-  for (const pane of ['content', 'style', 'preview']) {
-    const currentPaneId = `pane-${pane}`;
-    await page.locator(`nav li[aria-controls="${currentPaneId}"]`).click();
-    await expect(page.locator(`#${currentPaneId}`)).toBeVisible();
-    if (lastPane !== '#pane-preview') {
-      await expect(page.locator(lastPane)).toBeHidden();
-    }
-    lastPane = `#${currentPaneId}`;
+
+  for (const tab of await page.getByRole('tab').all()) {
+    await tab.click();
+    await expect(page.getByTestId(`${await tab.textContent()}-pane`)).toBeVisible();
   }
 });
