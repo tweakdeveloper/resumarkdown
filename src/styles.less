@@ -1,0 +1,22 @@
+// colors
+@color-accent-dark: #a8c3b5;
+@color-accent-light: #558b6e;
+@color-danger: #d64933;
+@color-dark: #2e282a;
+@color-light: #fbfbfb;
+
+// fonts
+@fonts-sans: Rubik, Arial, sans-serif;
+
+// layout
+@padding-lg: @padding-lg-y @padding-lg-x;
+@padding-lg-x: 2em;
+@padding-lg-y: 1.5em;
+@padding-md: @padding-md-y @padding-md-x;
+@padding-md-x: 1em;
+@padding-md-y: 0.5em;
+
+// utils
+.full-without-padding(@padding) {
+  @result: calc(100% - @padding * 2);
+}

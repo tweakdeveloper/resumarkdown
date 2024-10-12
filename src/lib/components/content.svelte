@@ -5,3 +5,9 @@
 </script>
 
 <div id={`pane-${pane}`} hidden={pane !== $navStore} role="tabpanel"><slot /></div>
+
+<style lang="less">
+  div {
+    height: 100%;
+  }
+</style>
