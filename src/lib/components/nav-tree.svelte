@@ -1,5 +1,15 @@
+<script lang="ts">
+  import NavToggle from './nav-toggle.svelte';
+
+  let open: boolean = false;
+
+  let hidden: boolean;
+  $: hidden = !open;
+</script>
+
 <nav>
-  <ul id="nav-tree" role="tablist">
+  <NavToggle bind:navOpen={open} />
+  <ul class:hidden role="tablist">
     <slot />
   </ul>
 </nav>
@@ -11,9 +21,13 @@
     margin: 0;
     padding: 0;
 
+    &.hidden {
+      display: none;
+    }
+
     @media screen and (min-width: @sizes[lg]) {
       align-items: center;
-      display: flex;
+      display: flex !important;
       flex-direction: row;
       justify-content: space-evenly;
     }
