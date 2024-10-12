@@ -37,6 +37,10 @@
     text-align: center;
     transition: background-color 0.2s;
 
+    @media screen and (min-width: @sizes[lg]) {
+      flex-grow: 1;
+    }
+
     &.selected {
       background-color: darken(@color-light, 20%);
     }
@@ -47,7 +51,14 @@
     }
 
     &:not(:last-of-type) {
-      border-bottom: 1px solid @color-dark;
+      @separator: 1px solid @color-dark;
+
+      border-bottom: @separator;
+
+      @media screen and (min-width: @sizes[lg]) {
+        border-bottom: unset;
+        border-right: @separator;
+      }
     }
   }
 </style>
