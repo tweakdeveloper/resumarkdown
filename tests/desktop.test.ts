@@ -30,3 +30,14 @@ test('desktop page has equal width for both columns', async ({ page }) => {
   };
   expect(contentWidth).toEqual(previewWidth);
 });
+
+test('desktop page has equal width for nav items', async ({ page }) => {
+  await page.goto('/');
+  const visibleTabs = page.getByRole('tab').filter({ hasNotText: 'preview' });
+  const { width: firstTabWidth } = (await visibleTabs.first().boundingBox()) ?? {
+    width: -1,
+  };
+  for (let i = 1; i < (await visibleTabs.count()); i++) {
+    await expect((await visibleTabs.nth(i).boundingBox())?.width).toEqual(firstTabWidth);
+  }
+});

@@ -36,6 +36,7 @@
 
 <style lang="less">
   li {
+    box-sizing: border-box;
     font-weight: @weight-semibold;
     margin: 0;
     padding: @padding-md;
@@ -43,7 +44,7 @@
     transition: background-color 0.2s;
 
     @media screen and (min-width: @sizes[lg]) {
-      flex-grow: 1;
+      width: 50%;
 
       &.hiddenOnDesktop {
         display: none;
@@ -67,6 +68,10 @@
       @media screen and (min-width: @sizes[lg]) {
         border-bottom: unset;
         border-right: @separator;
+
+        &:nth-of-type(n + 2) {
+          border-right: unset;
+        }
       }
     }
   }

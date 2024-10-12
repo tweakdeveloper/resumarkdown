@@ -16,7 +16,8 @@
 
 <style lang="less">
   ul {
-    border-bottom: 2px solid @color-dark;
+    @border: 2px solid @color-dark;
+    border-bottom: @border;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -27,9 +28,11 @@
 
     @media screen and (min-width: @sizes[lg]) {
       align-items: center;
+      border-right: @border;
       display: flex !important;
       flex-direction: row;
       justify-content: space-evenly;
+      width: 50%;
     }
   }
 </style>
