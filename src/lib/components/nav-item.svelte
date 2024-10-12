@@ -36,18 +36,18 @@
     padding: @padding-md;
     text-align: center;
     transition: background-color 0.2s;
-  }
 
-  li.selected {
-    background-color: darken(@color-light, 20%);
-  }
+    &.selected {
+      background-color: darken(@color-light, 20%);
+    }
 
-  li:focus,
-  li:hover {
-    background-color: darken(@color-light, 10%);
-  }
+    &:focus,
+    &:hover {
+      background-color: darken(@color-light, 10%);
+    }
 
-  li:not(:last-of-type) {
-    border-bottom: 1px solid @color-dark;
+    &:not(:last-of-type) {
+      border-bottom: 1px solid @color-dark;
+    }
   }
 </style>
