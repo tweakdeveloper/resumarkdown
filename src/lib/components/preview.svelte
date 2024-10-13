@@ -18,8 +18,15 @@
 </main>
 
 <style lang="less">
+  code {
+    display: block;
+    padding: @padding-md-x 0;
+  }
+
   main {
     grid-area: preview;
+    margin: 0;
+    padding: @padding-lg;
 
     &.mobile {
       grid-area: editor;
@@ -28,5 +35,11 @@
         display: none;
       }
     }
+  }
+
+  h2 {
+    font-weight: @font-w-semibold;
+    margin: 0;
+    padding: 0;
   }
 </style>
