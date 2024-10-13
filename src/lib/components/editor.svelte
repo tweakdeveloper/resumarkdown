@@ -21,5 +21,9 @@
     &.hidden {
       display: none;
     }
+
+    @media screen and (min-width: @sizes[lg]) {
+      border-right: 2px solid @color-dark;
+    }
   }
 </style>
