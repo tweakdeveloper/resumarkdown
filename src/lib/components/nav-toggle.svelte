@@ -18,12 +18,8 @@
     border: none;
     color: @color-light;
     font-size: @font-s-md;
-    font-weight: @weight-semibold;
+    font-weight: @font-w-semibold;
     padding: @padding-sm;
     width: 100%;
-
-    @media screen and (min-width: @sizes[lg]) {
-      display: none;
-    }
   }
 </style>

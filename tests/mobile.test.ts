@@ -9,25 +9,26 @@ test.use({
 
 test('mobile page has nav tree hidden by default', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('nav ul')).toBeHidden();
+  await expect(page.getByRole('navigation').getByRole('tablist')).toBeHidden();
 });
 
 test('mobile page has nav toggle', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('nav button')).toBeVisible();
+  await expect(page.getByRole('navigation').getByRole('button')).toBeVisible();
 });
 
 test('nav toggle works', async ({ page }) => {
   await page.goto('/');
-  await page.locator('nav button').click();
-  await expect(page.locator('nav ul')).toBeVisible();
-  await page.locator('nav button').click();
-  await expect(page.locator('nav ul')).toBeHidden();
+  await page.getByText('show navigation').click();
+  await expect(page.getByRole('navigation').getByRole('tablist')).toBeVisible();
+  await page.getByText('hide navigation').click();
+  await expect(page.getByRole('navigation').getByRole('tablist')).toBeHidden();
 });
 
 test('mobile page has single-column layout', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('#pane-preview')).toBeHidden();
+  await expect(page.getByTestId('content-pane')).toBeVisible();
+  await expect(page.getByTestId('preview-pane')).toBeHidden();
 });
 
 test('mobile page has preview nav item', async ({ page }) => {

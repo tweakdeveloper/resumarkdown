@@ -6,10 +6,6 @@
   let selected: boolean;
   $: selected = destination === $pane;
 
-  // we need to hide the "preview" tab on desktop
-  let hiddenOnDesktop: boolean;
-  $: hiddenOnDesktop = destination === 'preview';
-
   function handleKey({ key }: KeyboardEvent) {
     if (key === ' ' || key === 'Enter' || key === 'Spacebar') {
       navigate();
@@ -26,7 +22,6 @@
   aria-selected={selected}
   role="tab"
   tabindex="0"
-  class:hiddenOnDesktop
   class:selected
   on:click={navigate}
   on:keyup={handleKey}
@@ -36,20 +31,13 @@
 
 <style lang="less">
   li {
-    box-sizing: border-box;
-    font-weight: @weight-semibold;
+    @separator: 1px solid @color-dark;
+
+    font-weight: @font-w-semibold;
     margin: 0;
     padding: @padding-md;
     text-align: center;
     transition: background-color 0.2s;
-
-    @media screen and (min-width: @sizes[lg]) {
-      width: 50%;
-
-      &.hiddenOnDesktop {
-        display: none;
-      }
-    }
 
     &.selected {
       background-color: darken(@color-light, 20%);
@@ -61,17 +49,15 @@
     }
 
     &:not(:last-of-type) {
-      @separator: 1px solid @color-dark;
-
       border-bottom: @separator;
+    }
 
-      @media screen and (min-width: @sizes[lg]) {
-        border-bottom: unset;
+    @media screen and (min-width: @sizes[lg]) {
+      flex: 1;
+
+      &:not(:last-of-type) {
+        border-bottom: none;
         border-right: @separator;
-
-        &:nth-of-type(n + 2) {
-          border-right: unset;
-        }
       }
     }
   }

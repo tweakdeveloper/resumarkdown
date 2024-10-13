@@ -1,4 +1,6 @@
-<h1><slot /></h1>
+<header>
+  <h1><slot /></h1>
+</header>
 
 <style lang="less">
   h1 {
@@ -7,5 +9,9 @@
     color: @color-light;
     padding: @padding-md;
     text-align: center;
+  }
+
+  header {
+    grid-area: headline;
   }
 </style>

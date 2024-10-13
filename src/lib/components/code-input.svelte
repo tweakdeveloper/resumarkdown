@@ -15,12 +15,5 @@
     padding: @padding-lg;
     resize: none;
     width: .full-without-padding(@padding-lg-x) [];
-
-    @media screen and (min-width: @sizes[lg]) {
-      font-size: unset;
-      height: .full-without-padding(@padding-xl-y) [];
-      margin: @padding-xl;
-      width: .full-without-padding(@padding-xl-x) [];
-    }
   }
 </style>

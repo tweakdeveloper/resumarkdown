@@ -1,11 +1,38 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
+
+  import { pane } from '$lib/stores/nav.js';
+
   import CodeInput from '$lib/components/code-input.svelte';
-  import Content from '$lib/components/content.svelte';
+  import Editor from '$lib/components/editor.svelte';
   import Headline from '$lib/components/headline.svelte';
   import NavItem from '$lib/components/nav-item.svelte';
   import NavTree from '$lib/components/nav-tree.svelte';
+  import Preview from '$lib/components/preview.svelte';
 
   export let data;
+
+  let mobile: boolean = data.mobile;
+
+  function checkIsDesktop() {
+    // TODO: figure out how to remove hard-coded value here
+    mobile = !window.matchMedia('screen and (min-width: 1280px)').matches;
+
+    if (!mobile && get(pane) === 'preview') {
+      pane.set('content');
+    }
+  }
+
+  onMount(() => {
+    checkIsDesktop();
+
+    window.addEventListener('resize', checkIsDesktop);
+
+    return () => {
+      window.removeEventListener('resize', checkIsDesktop);
+    };
+  });
 
   let markdown: string = '';
   let stylesheet: string = '';
@@ -15,65 +42,40 @@
   <title>resumarkdown</title>
 </svelte:head>
 <div>
-  <header>
-    <Headline>resumarkdown</Headline>
-    <NavTree mobile={data.mobile}>
-      <NavItem destination="content">content</NavItem>
-      <NavItem destination="style">style</NavItem>
+  <Headline>resumarkdown</Headline>
+  <NavTree {mobile}>
+    <NavItem destination="content">content</NavItem>
+    <NavItem destination="style">style</NavItem>
+    {#if mobile}
       <NavItem destination="preview">preview</NavItem>
-    </NavTree>
-  </header>
-  <main>
-    <Content pane="content" testid="content-pane">
-      <CodeInput bind:code={markdown} />
-    </Content>
-    <Content pane="style" testid="style-pane">
-      <CodeInput bind:code={stylesheet} />
-    </Content>
-    <Content pane="preview" testid="preview-pane">
-      <dl>
-        <dt>markdown:</dt>
-        <dd>{markdown !== '' ? markdown : '???'}</dd>
-        <dt>stylesheet:</dt>
-        <dd>{stylesheet !== '' ? stylesheet : '???'}</dd>
-      </dl>
-    </Content>
-  </main>
+    {/if}
+  </NavTree>
+  <Editor pane="content" testid="content-pane">
+    <CodeInput bind:code={markdown} />
+  </Editor>
+  <Editor pane="style" testid="style-pane">
+    <CodeInput bind:code={stylesheet} />
+  </Editor>
+  <Preview {mobile} {markdown} {stylesheet} />
 </div>
 
 <style lang="less">
-  // util
-  .margin-v(@v) {
-    margin-bottom: @v;
-    margin-top: @v;
-  }
-
-  // styles
   div {
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
+    align-content: start;
+    display: grid;
+    grid-template-areas:
+      'headline'
+      'navtree'
+      'editor';
+    grid-template-rows: min-content min-content 1fr;
     height: 100%;
-    justify-content: start;
-  }
-
-  dd {
-    .margin-v(@padding-lg-y);
-  }
-
-  dl {
-    margin: 0;
-    padding: @padding-xl;
-  }
-
-  main {
-    flex-grow: 1;
 
     @media screen and (min-width: @sizes[lg]) {
-      align-items: start;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        'headline headline'
+        'navtree preview'
+        'editor preview';
     }
   }
 </style>
