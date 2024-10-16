@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { pane } from '$lib/stores/nav';
+  import { pane } from '$lib/stores/nav.js';
 
-  export let mobile: boolean;
+  interface Props {
+    mobile?: boolean;
+    markdown: string;
+    stylesheet: string;
+  }
 
-  let hidden: boolean;
-  $: hidden = mobile ? $pane !== 'preview' : true;
+  let { mobile = true, markdown, stylesheet }: Props = $props();
 
-  export let markdown: string;
-  export let stylesheet: string;
+  let hidden: boolean = $derived(mobile ? $pane !== 'preview' : true);
 </script>
 
 <main class:hidden class:mobile data-testid="preview-pane">

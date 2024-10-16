@@ -1,10 +1,16 @@
 <script lang="ts">
-  import { pane, type Pane } from '$lib/stores/nav';
+  import { type Snippet } from 'svelte';
 
-  export let destination: Pane;
+  import { pane, type Pane } from '$lib/stores/nav.js';
 
-  let selected: boolean;
-  $: selected = destination === $pane;
+  interface Props {
+    destination: Pane;
+    children: Snippet;
+  }
+
+  let { destination, children }: Props = $props();
+
+  let selected: boolean = $derived(destination === $pane);
 
   function handleKey({ key }: KeyboardEvent) {
     if (key === ' ' || key === 'Enter' || key === 'Spacebar') {
@@ -23,10 +29,10 @@
   role="tab"
   tabindex="0"
   class:selected
-  on:click={navigate}
-  on:keyup={handleKey}
+  onclick={navigate}
+  onkeyup={handleKey}
 >
-  <slot />
+  {@render children()}
 </li>
 
 <style lang="less">

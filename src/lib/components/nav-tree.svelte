@@ -1,11 +1,17 @@
 <script lang="ts">
+  import { type Snippet } from 'svelte';
   import { slide } from 'svelte/transition';
 
   import NavToggle from './nav-toggle.svelte';
 
-  export let mobile: boolean = true;
+  interface Props {
+    mobile?: boolean;
+    children: Snippet;
+  }
 
-  let open: boolean = false;
+  let { mobile = true, children }: Props = $props();
+
+  let open: boolean = $state(false);
 </script>
 
 <nav>
@@ -14,7 +20,7 @@
   {/if}
   {#if open || !mobile}
     <ul role="tablist" transition:slide={{ duration: 300 }}>
-      <slot />
+      {@render children()}
     </ul>
   {/if}
 </nav>

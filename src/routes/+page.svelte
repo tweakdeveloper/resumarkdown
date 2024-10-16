@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
 
+  import type { PageData } from './$types';
+
   import { pane } from '$lib/stores/nav.js';
 
   import CodeInput from '$lib/components/code-input.svelte';
@@ -11,9 +13,13 @@
   import NavTree from '$lib/components/nav-tree.svelte';
   import Preview from '$lib/components/preview.svelte';
 
-  export let data;
+  interface Props {
+    data: PageData;
+  }
 
-  let mobile: boolean = data.mobile;
+  let { data }: Props = $props();
+
+  let mobile: boolean = $state(data.mobile);
 
   function checkIsDesktop() {
     // TODO: figure out how to remove hard-coded value here
@@ -34,8 +40,8 @@
     };
   });
 
-  let markdown: string = '';
-  let stylesheet: string = '';
+  let markdown: string = $state('');
+  let stylesheet: string = $state('');
 </script>
 
 <svelte:head>

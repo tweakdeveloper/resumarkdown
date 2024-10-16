@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let code: string;
+  interface Props {
+    code: string;
+  }
+
+  let { code = $bindable() }: Props = $props();
 </script>
 
 <textarea bind:value={code}></textarea>

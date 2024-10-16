@@ -1,16 +1,19 @@
 <script lang="ts">
-  export let navOpen: boolean;
+  interface Props {
+    navOpen: boolean;
+  }
+
+  let { navOpen = $bindable() }: Props = $props();
 
   // if nav is open, we should "hide" it on press. if not, we should "show" it.
-  let action: string;
-  $: action = navOpen ? 'hide' : 'show';
+  let action: string = $derived(navOpen ? 'hide' : 'show');
 
   function toggle() {
     navOpen = !navOpen;
   }
 </script>
 
-<button on:click={toggle}>{action} navigation</button>
+<button onclick={toggle}>{action} navigation</button>
 
 <style lang="less">
   button {

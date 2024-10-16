@@ -1,17 +1,22 @@
 <script lang="ts">
-  import { pane as navStore, type Pane } from '$lib/stores/nav';
+  import { type Snippet } from 'svelte';
 
-  export let pane: Pane;
+  import { pane as navStore, type Pane } from '$lib/stores/nav.js';
 
-  export let testid: string | undefined = undefined;
+  interface Props {
+    pane: Pane;
+    testid?: string;
+    children?: Snippet;
+  }
+
+  let { pane, testid, children }: Props = $props();
 
   // don't show pane if we're not the current pane
-  let hidden: boolean;
-  $: hidden = pane !== $navStore;
+  let hidden: boolean = $derived(pane !== $navStore);
 </script>
 
 <div id={`pane-${pane}`} data-testid={testid} role="tabpanel" class:hidden>
-  <slot />
+  {@render children?.()}
 </div>
 
 <style lang="less">
