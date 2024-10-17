@@ -12,7 +12,7 @@
 
   let hidden: boolean = $derived(mobile ? $pane !== 'preview' : true);
 
-  let output: Promise<string> = $derived.by(() => renderPreview(markdown, stylesheet));
+  let output: Promise<string> = $derived(renderPreview(markdown, stylesheet));
 </script>
 
 <main class:hidden class:mobile data-testid="preview-pane">
