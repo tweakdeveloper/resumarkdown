@@ -1,12 +1,6 @@
 <script lang="ts">
-  import rehypeDocument from 'rehype-document';
-  import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-  import rehypeStringify from 'rehype-stringify';
-  import remarkParse from 'remark-parse';
-  import remarkRehype from 'remark-rehype';
-  import { unified } from 'unified';
-
   import { pane } from '$lib/stores/nav.js';
+  import renderPreview from '$lib/render-preview';
 
   interface Props {
     mobile?: boolean;
@@ -18,25 +12,7 @@
 
   let hidden: boolean = $derived(mobile ? $pane !== 'preview' : true);
 
-  let output: Promise<string> = $derived.by(async () => {
-    let allowedTags: string[] = ['body', 'head', 'html', 'style'];
-    if (defaultSchema.tagNames) {
-      allowedTags = [...defaultSchema.tagNames, ...allowedTags];
-    }
-    return String(
-      await unified()
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypeDocument, { style: stylesheet })
-        .use(rehypeSanitize, {
-          ...defaultSchema,
-          allowDoctypes: true,
-          tagNames: allowedTags,
-        })
-        .use(rehypeStringify)
-        .process(markdown),
-    );
-  });
+  let output: Promise<string> = $derived.by(() => renderPreview(markdown, stylesheet));
 </script>
 
 <main class:hidden class:mobile data-testid="preview-pane">
