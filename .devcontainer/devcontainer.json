@@ -1,0 +1,13 @@
+{
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "svelte.svelte-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [5173]
+}

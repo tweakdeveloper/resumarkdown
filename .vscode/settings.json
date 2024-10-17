@@ -1,6 +1,8 @@
 {
   "cSpell.words": [
+    "devcontainers",
     "doctypes",
+    "esbenp",
     "rehype",
     "resumarkdown",
     "résumé",
@@ -8,5 +10,16 @@
     "tablist",
     "testid",
     "textbox"
-  ]
+  ],
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "svelte.enable-ts-plugin": true,
+  "[javascript][json][jsonc][typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
 }
