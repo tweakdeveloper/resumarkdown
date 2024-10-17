@@ -6,3 +6,4 @@ FROM mcr.microsoft.com/devcontainers/javascript-node:20-bookworm
 # ^^^ that's a surprise tool that will help us later ^^^
 
 RUN npm install
+RUN npx playwright install
