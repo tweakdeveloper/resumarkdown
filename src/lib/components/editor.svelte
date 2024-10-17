@@ -21,6 +21,8 @@
 
 <style lang="less">
   div {
+    .container();
+
     grid-area: editor;
 
     &.hidden {

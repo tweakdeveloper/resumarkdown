@@ -36,3 +36,27 @@
 .full-without-padding(@padding) {
   @result: calc(100% - @padding * 2);
 }
+
+// shared sizing mixins
+.container() {
+  box-sizing: border-box;
+  padding: @padding-lg;
+
+  @media screen and (min-width: @sizes[lg]) {
+    padding: @padding-xl;
+  }
+}
+
+.container-content() {
+  border: 1px solid @color-dark;
+  border-radius: @border-r-xl;
+  box-sizing: border-box;
+  font-size: @font-s-md;
+  height: 100%;
+  padding: @padding-lg;
+  width: 100%;
+
+  @media screen and (min-width: @sizes[lg]) {
+    font-size: unset;
+  }
+}
