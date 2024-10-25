@@ -37,13 +37,9 @@
 
 <style lang="less">
   li {
-    @separator: 1px solid @color-dark;
+    .selectable();
 
-    font-weight: @font-w-semibold;
-    margin: 0;
-    padding: @padding-md;
-    text-align: center;
-    transition: background-color 0.2s;
+    @separator: 1px solid @color-dark;
 
     &.selected {
       background-color: darken(@color-light, 20%);
