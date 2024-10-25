@@ -5,8 +5,12 @@ const config: PlaywrightTestConfig = {
     command: 'npm run build && npm run preview',
     port: 4173,
   },
+  expect: {
+    timeout: 2.5 * 1000,
+  },
   testDir: 'tests',
   testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+  timeout: 5 * 1000,
   use: {
     viewport: {
       height: 900,
