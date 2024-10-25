@@ -63,6 +63,13 @@
     <CodeInput bind:code={stylesheet} />
   </Editor>
   <Preview {mobile} {markdown} {stylesheet} />
+  <footer>
+    <p>
+      made with &#x2764; by
+      <a href="https://github.com/tweakdeveloper" title="my github profile">@tweakdeveloper</a>
+    </p>
+    <a href="/attributions">attributions</a>
+  </footer>
 </div>
 
 <style lang="less">
@@ -72,7 +79,8 @@
     grid-template-areas:
       'headline'
       'navtree'
-      'editor';
+      'editor'
+      'footer';
     grid-template-rows: min-content min-content 1fr;
     height: 100%;
 
@@ -81,7 +89,49 @@
       grid-template-areas:
         'headline headline'
         'navtree preview'
-        'editor preview';
+        'editor preview'
+        'footer footer';
     }
+  }
+
+  footer {
+    align-items: center;
+    background-color: @color-dark;
+    border-top: 2px solid @color-dark;
+    box-sizing: border-box;
+    color: @color-light;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: @padding-md-y;
+    grid-area: footer;
+    justify-content: space-between;
+    padding: @padding-lg;
+
+    @media screen and (min-width: @sizes[lg]) {
+      flex-flow: row nowrap;
+      gap: @padding-sm-y;
+      padding: @padding-md;
+    }
+  }
+
+  footer a {
+    color: @color-light;
+    transition: color 0.2s;
+
+    &:visited {
+      color: darken(@color-light, 30%);
+    }
+
+    &:hover {
+      color: darken(@color-light, 20%);
+    }
+
+    &:active {
+      color: darken(@color-light, 10%);
+    }
+  }
+
+  footer p {
+    margin: 0;
   }
 </style>
