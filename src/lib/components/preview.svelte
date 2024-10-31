@@ -15,6 +15,14 @@
   let hidden: boolean = $derived(mobile ? $pane !== 'preview' : true);
 
   let output: Promise<string> = $derived(renderPreview(markdown, stylesheet));
+
+  async function performRender(event: MouseEvent) {
+    event.preventDefault();
+    const data = new FormData();
+    data.append('markdown', markdown);
+    data.append('stylesheet', stylesheet);
+    console.log(await fetch('/render', { method: 'POST', body: data }));
+  }
 </script>
 
 <main class:hidden class:mobile data-testid="preview-pane">
@@ -22,7 +30,7 @@
     <p>processing...</p>
   {:then result}
     <iframe title="résumé preview" srcdoc={result}></iframe>
-    <button>
+    <button type="submit" onclick={performRender}>
       <span>download</span>
       <iconify-icon icon="ion:download-outline" height="1.25em"></iconify-icon>
     </button>
