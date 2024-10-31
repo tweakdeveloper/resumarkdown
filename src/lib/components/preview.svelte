@@ -1,4 +1,6 @@
 <script lang="ts">
+  import 'iconify-icon';
+
   import { pane } from '$lib/stores/nav.js';
   import renderPreview from '$lib/render-preview';
 
@@ -20,7 +22,10 @@
     <p>processing...</p>
   {:then result}
     <iframe title="résumé preview" srcdoc={result}></iframe>
-    <button>download</button>
+    <button>
+      <span>download</span>
+      <iconify-icon icon="ion:download-outline" height="1.25em"></iconify-icon>
+    </button>
   {:catch err}
     <p style:color="red">error: {err}!</p>
   {/await}
@@ -42,6 +47,7 @@
       border: 1px solid @color-dark;
       border-radius: @border-r-xl;
       color: @color-light;
+      font-size: @font-s-sm;
       font-weight: @font-w-semibold;
       padding: @padding-md;
 
@@ -51,6 +57,16 @@
 
       &:hover {
         background-color: lighten(@color-dark, 15%);
+      }
+
+      & > iconify-icon,
+      & > span {
+        vertical-align: middle;
+      }
+
+      iconify-icon {
+        height: 1.25em;
+        width: 1.25em;
       }
     }
 
