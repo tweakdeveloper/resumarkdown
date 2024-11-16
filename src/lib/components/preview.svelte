@@ -18,10 +18,13 @@
 
   async function performRender(event: MouseEvent) {
     event.preventDefault();
-    const data = new FormData();
-    data.append('markdown', markdown);
-    data.append('stylesheet', stylesheet);
-    console.log(await fetch('/render', { method: 'POST', body: data }));
+    console.log(
+      await fetch('/render', {
+        method: 'POST',
+        body: await output,
+        headers: { 'content-type': 'text/html' },
+      }),
+    );
   }
 </script>
 
