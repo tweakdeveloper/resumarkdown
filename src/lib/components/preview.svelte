@@ -16,20 +16,11 @@
 
   let output: Promise<string> = $derived(renderPreview(markdown, stylesheet));
 
+  let previewFrame = $state<HTMLIFrameElement | undefined>();
+
   async function performRender(event: MouseEvent) {
     event.preventDefault();
-    const renderResponse = await fetch('/render', {
-      method: 'POST',
-      body: await output,
-      headers: { 'content-type': 'text/html' },
-    });
-
-    if (!renderResponse.ok) {
-      return;
-    }
-
-    const docURL = URL.createObjectURL(await renderResponse.blob());
-    window.open(docURL, '_blank');
+    previewFrame?.contentWindow?.postMessage('print');
   }
 </script>
 
@@ -37,7 +28,7 @@
   {#await output}
     <p>processing...</p>
   {:then result}
-    <iframe title="résumé preview" srcdoc={result}></iframe>
+    <iframe title="résumé preview" srcdoc={result} bind:this={previewFrame}></iframe>
     <button type="submit" onclick={performRender}>
       <span>download</span>
       <iconify-icon icon="ion:download-outline" height="1.25em"></iconify-icon>
