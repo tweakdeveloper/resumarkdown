@@ -18,13 +18,18 @@
 
   async function performRender(event: MouseEvent) {
     event.preventDefault();
-    console.log(
-      await fetch('/render', {
-        method: 'POST',
-        body: await output,
-        headers: { 'content-type': 'text/html' },
-      }),
-    );
+    const renderResponse = await fetch('/render', {
+      method: 'POST',
+      body: await output,
+      headers: { 'content-type': 'text/html' },
+    });
+
+    if (!renderResponse.ok) {
+      return;
+    }
+
+    const docURL = URL.createObjectURL(await renderResponse.blob());
+    window.open(docURL, '_blank');
   }
 </script>
 
