@@ -15,6 +15,13 @@ window.addEventListener('message', (evt) => {
 });
 `;
 
+const removePrintMarginsStyle = `
+@page {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+`;
+
 const injectPrintScript: Plugin<[], HastRoot> = function () {
   return (tree) => {
     const printScriptNode = h('script', printScript);
@@ -25,6 +32,19 @@ const injectPrintScript: Plugin<[], HastRoot> = function () {
       (node) => node.type === 'element' && node.tagName === 'body',
     ) as HastElement;
     bodyNode.children.push(printScriptNode);
+  };
+};
+
+const injectRemovePrintMarginsStyle: Plugin<[], HastRoot> = function () {
+  return (tree) => {
+    const removePrintMarginsStyleNode = h('style', removePrintMarginsStyle);
+    const htmlNode = tree.children.find(
+      (node) => node.type === 'element' && node.tagName === 'html',
+    ) as HastElement;
+    const headNode = htmlNode.children.find(
+      (node) => node.type === 'element' && node.tagName === 'head',
+    ) as HastElement;
+    headNode.children.push(removePrintMarginsStyleNode);
   };
 };
 
@@ -43,6 +63,7 @@ const renderPreview = async (markdown: string, stylesheet: string): Promise<stri
         allowDoctypes: true,
         tagNames: allowedTags,
       })
+      .use(injectRemovePrintMarginsStyle)
       .use(injectPrintScript)
       .use(rehypeStringify)
       .process(markdown),
